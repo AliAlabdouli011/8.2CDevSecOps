@@ -1,12 +1,3 @@
-  "devDependencies": {
-    "...": "..."
-  },
-  "jest": {
-    "collectCoverage": true,
-    "collectCoverageFrom": ["src/**/*.js"],
-    "testEnvironment": "node"
-  }
-}
 {
   "name": "goof",
   "version": "1.0.1",
@@ -17,18 +8,10 @@
     "url": "https://github.com/Snyk/snyk-todo-list-demo-app/"
   },
   "scripts": {
-    "dev": "NODE_OPTIONS=... nodemon ./app.js",
-    "start": "NODE_OPTIONS=... node app.js",
-    "build": "browserify -r jquery > public/js/bundle.js",
-    "cleanup": "mongo express-todo --eval 'db.todos.remove({});'",
-    "test": "jest --coverage",
-    "snyk": "snyk test"
+    "test": "jest --coverage"
   },
-  "dependencies": {
-    "...": "..."
-  },
+  "dependencies": {},
   "devDependencies": {
-    "...": "...",
     "jest": "^30.0.3"
   },
   "jest": {
@@ -37,4 +20,5 @@
     "testEnvironment": "node"
   }
 }
+
 
