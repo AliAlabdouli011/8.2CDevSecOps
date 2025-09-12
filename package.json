@@ -1,3 +1,7 @@
+"jest": {
+  "collectCoverage": true,
+  "collectCoverageFrom": ["src/**/*.js"]
+}
 {
   "name": "goof",
   "version": "1.0.1",

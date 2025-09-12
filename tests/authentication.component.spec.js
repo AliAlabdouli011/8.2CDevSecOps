@@ -1,37 +1,10 @@
-// Jest tests for a simple PasswordComponent example
+// tests/authentication.component.spec.js
+const { PasswordComponent } = require('../src/password-component');
+
 describe('Component Tests', () => {
   describe('PasswordComponent', () => {
     let comp;
     let service;
-
-    // minimal "component" to exercise
-    class PasswordComponent {
-      constructor(service) {
-        this.service = service;
-        this.password = '';
-        this.confirmPassword = '';
-        this.error = null;
-        this.success = null;
-      }
-      doNoMatch() {
-        return this.password !== this.confirmPassword;
-      }
-      changePassword() {
-        if (this.doNoMatch()) {
-          this.error = 'ERROR';
-          this.success = null;
-          return;
-        }
-        try {
-          this.service.save(this.password);
-          this.error = null;
-          this.success = 'OK';
-        } catch (e) {
-          this.error = 'ERROR';
-          this.success = null;
-        }
-      }
-    }
 
     beforeEach(() => {
       service = { save: jest.fn() };
@@ -53,38 +26,23 @@ describe('Component Tests', () => {
     });
 
     test('should call Auth.changePassword when passwords match', () => {
-      // GIVEN
       comp.password = comp.confirmPassword = 'myPassword';
-
-      // WHEN
       comp.changePassword();
-
-      // THEN
       expect(service.save).toHaveBeenCalledWith('myPassword');
     });
 
     test('should set success to OK upon success', () => {
-      // GIVEN
       comp.password = comp.confirmPassword = 'myPassword';
-
-      // WHEN
       comp.changePassword();
-
-      // THEN
       expect(comp.doNoMatch()).toBe(false);
       expect(comp.error).toBeNull();
       expect(comp.success).toBe('OK');
     });
 
     test('should notify of error if change password fails', () => {
-      // GIVEN — simulate service failure
-      service.save.mockImplementation(() => { throw new Error('boom'); });
       comp.password = comp.confirmPassword = 'myPassword';
-
-      // WHEN
+      service.save.mockImplementation(() => { throw new Error('boom'); });
       comp.changePassword();
-
-      // THEN
       expect(comp.doNoMatch()).toBe(false);
       expect(comp.success).toBeNull();
       expect(comp.error).toBe('ERROR');
